@@ -29,7 +29,7 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://polymerlabs.github.io/seed-element
 -->
-<polymer-element name="clever-rule-service" attributes="rules url">
+<polymer-element name="clever-rule-service" attributes="rules url rulesDefinitionFormat">
 
     <template>
         <style>
@@ -62,7 +62,11 @@ Element providing solution to no problem in particular.
              */
             rulesLoaded: function () {
                 var json = this.$.ajax.response;
-                this.rules = new FormSchema.JQueryValidationRuleFactory(json).CreateRule("Main");
+                if (this.rulesDefinitionFormat === 'JSONSchema'){
+                    this.rules = new FormSchema.JSONSchemaRuleFactory(json).CreateRule("Main");
+                } else {
+                    this.rules = new FormSchema.JQueryValidationRuleFactory(json).CreateRule("Main");
+                }
             }
         });
     </script>

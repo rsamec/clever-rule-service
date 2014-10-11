@@ -1,10 +1,10 @@
 {
-  "name": "seed-element",
+  "name": "clever-rule-service",
   "version": "1.0.1",
   "authors": [
     "Roman Samec <roman.samec2@gmail.com>"
   ],
-  "description": "Element that loads validation rule service for passed url.",
+  "description": "Business rules and validation service. Definitions loaded via declarative json for passed url.",
   "keywords": [
     "web-component",
     "web-components",
