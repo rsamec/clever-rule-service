@@ -49,6 +49,15 @@ Element providing solution to no problem in particular.
     <script>
 
         Polymer('clever-rule-service',{
+            /**
+             * The `rulesDefinitionFormat` attribute specifies that format used for declarative rules definition.
+             * Supported formats are JSONSchema, RulesMetaData - see more information at https://github.com/rsamec/business-rules-engine
+             *
+             * @attribute
+             * @type string
+             * @default 'RulesMetaData'
+             */
+            rulesDefinitionFormat:'RulesMetaData',
             created: function () {
                 // Created is a lifecycle callback.
                 // You can do setup work in here.
@@ -56,7 +65,7 @@ Element providing solution to no problem in particular.
                 this.rules = {};
             },
             /**
-             * The `rulesLoaded` method will fire when the rule is loaded from url.
+             * The `rulesLoaded` method will be called when the declarative rules definition is loaded from url.
              *
              * @method rulesLoaded
              */

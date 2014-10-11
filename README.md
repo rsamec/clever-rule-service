@@ -1,11 +1,11 @@
 seed-element
 ============
 
-See the [component page](http://polymerlabs.github.io/seed-element) for more information.
+See the [component page](http://rsamec.github.io/clever-rule-service) for more information.
 
 ## Getting Started
 
-We've put together a [guide to seed-element](http://www.polymer-project.org/docs/start/reusableelements.html) to help get you rolling.
+I've put together a [guide to clever-rule-service](http://rsamec.github.io/clever-paper-input/components/clever-paper-input/demo.html) to help get you rolling.
 
 ## Testing Your Element
 
