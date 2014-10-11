@@ -29,7 +29,7 @@ Element providing solution to no problem in particular.
 @status alpha
 @homepage http://rsamec.github.io/clever-rule-service
 -->
-<polymer-element name="clever-rule-service" attributes="rules url rulesDefinitionFormat">
+<polymer-element name="clever-rule-service" attributes="rules url rulesFormat">
 
     <template>
         <style>
@@ -52,7 +52,7 @@ Element providing solution to no problem in particular.
             /**
              * The `url' attribute specifies the URI with declarative rules definition.
              *
-             * @property
+             * @property url
              * @type string
              * @default 'url'
              */
@@ -61,11 +61,11 @@ Element providing solution to no problem in particular.
              * The `rulesDefinitionFormat` attribute specifies that format used for declarative rules definition.
              * Supported formats are JSONSchema, RulesMetaData - see more information at https://github.com/rsamec/business-rules-engine
              *
-             * @property
+             * @property rulesFormat
              * @type string
              * @default 'RulesMetaData'
              */
-            rulesDefinitionFormat:'RulesMetaData',
+            rulesFormat:'RulesMetaData',
             created: function () {
                 // Created is a lifecycle callback.
                 // You can do setup work in here.
@@ -79,7 +79,7 @@ Element providing solution to no problem in particular.
              */
             rulesLoaded: function () {
                 var json = this.$.ajax.response;
-                if (this.rulesDefinitionFormat === 'JSONSchema'){
+                if (this.rulesFormat === 'JSONSchema'){
                     this.rules = new FormSchema.JSONSchemaRuleFactory(json).CreateRule("Main");
                 } else {
                     this.rules = new FormSchema.JQueryValidationRuleFactory(json).CreateRule("Main");
