@@ -1,0 +1,155 @@
+<!--
+    @license
+    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>seed-element Demo</title>
+
+    <script src="../platform/platform.js"></script>
+    <link rel="import" href="clever-paper-input.html">
+
+</head>
+<body unresolved>
+
+<p>An example of using <code>&lt;clever-paper-input></code>:</p>
+
+<template id="demo-form" is="auto-binding">
+    <clever-paper-input label="FirstName" placeholder="First name" rule="{{rules.FirstName}}"
+                        value="{{data.FirstName}}" layout vertical>
+    </clever-paper-input>
+
+    <clever-paper-input label="LastName" placeholder="Last name" rule="{{rules.LastName}}"
+                        value="{{data.LastName}}" layout vertical>
+    </clever-paper-input>
+    <br/><br/><br/>
+
+    {{data.FirstName | emptyFilter }} {{data.LastName | emptyFilter }}
+</template>
+<script>
+    PolymerExpressions.prototype.emptyFilter = function (input,emptyVal) {
+        if (emptyVal === undefined) emptyVal = "";
+        return input!==undefined? input :emptyVal;
+    };
+
+    var t = document.querySelector('#demo-form');
+    t.addEventListener('template-bound', function () {
+        t.data = {};
+
+
+        var Signal = (function () {
+            function Signal() {
+                this.listeners = [];
+                this.priorities = [];
+            }
+            Signal.prototype.add = function (listener, priority) {
+                if (typeof priority === "undefined") { priority = 0; }
+                var index = this.listeners.indexOf(listener);
+                if (index !== -1) {
+                    this.priorities[index] = priority;
+                    return;
+                }
+                for (var i = 0, l = this.priorities.length; i < l; i++) {
+                    if (this.priorities[i] < priority) {
+                        this.priorities.splice(i, 0, priority);
+                        this.listeners.splice(i, 0, listener);
+                        return;
+                    }
+                }
+                this.priorities.push(priority);
+                this.listeners.push(listener);
+            };
+
+            Signal.prototype.remove = function (listener) {
+                var index = this.listeners.indexOf(listener);
+                if (index >= 0) {
+                    this.priorities.splice(index, 1);
+                    this.listeners.splice(index, 1);
+                }
+            };
+
+            Signal.prototype.dispatch = function (parameter) {
+                var indexesToRemove;
+                var hasBeenCanceled = this.listeners.every(function (listener) {
+                    var result = listener(parameter);
+                    return result !== false;
+                });
+
+                return hasBeenCanceled;
+            };
+
+            Signal.prototype.clear = function () {
+                this.listeners = [];
+                this.priorities = [];
+            };
+
+            Signal.prototype.hasListeners = function () {
+                return this.listeners.length > 0;
+            };
+            return Signal;
+        })();
+
+        var RequiredPropertyRule = (function () {
+            function RequiredPropertyRule(Name) {
+                this.Name = Name;
+                this.ValidationResult = {};
+                this.ErrorsChanged = new Signal();
+
+                this.errorObserver = new ObjectObserver(this.ValidationResult);
+                this.errorObserver.open(function (newValue, oldValue) {
+                    this.ErrorsChanged.dispatch(newValue);
+                }.bind(this));
+
+            }
+
+            RequiredPropertyRule.prototype.Validate =  function (context) {
+                this.ValidateEx(context[this.Name]);
+            }
+            RequiredPropertyRule.prototype.ValidateEx =  function (value) {
+                this.ValidationResult.HasErrors = false;
+                this.ValidationResult.ErrorMessage = "";
+
+                if (value == undefined || value == '') {
+                    this.ValidationResult.HasErrors = true;
+                    this.ValidationResult.ErrorMessage = "Please, fix this field."
+                    return;
+                }
+            }
+            RequiredPropertyRule.prototype.ValidateAsyncEx =  function (value) {
+                return;
+            }
+            Object.defineProperty(RequiredPropertyRule.prototype, "HasErrors", {
+                get: function () {
+                    return this.ValidationResult.HasErrors;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            Object.defineProperty(RequiredPropertyRule.prototype, "ErrorMessage", {
+                get: function () {
+                    return this.ValidationResult.ErrorMessage;
+                },
+                enumerable: true,
+                configurable: true
+            });
+
+            return RequiredPropertyRule;
+        })();
+
+        t.rules = {};
+        t.rules.LastName = new RequiredPropertyRule("LastName");
+        t.rules.FirstName = new RequiredPropertyRule("FirstName");
+        // You can do something with template.itemsApiURL
+        // like use it to make an API call, etc.
+    });
+</script>
+</body>
+
+</html>

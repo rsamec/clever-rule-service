@@ -1,0 +1,99 @@
+<!--
+    @license
+    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../paper-input/paper-input.html">
+
+<!--
+Element providing solution to no problem in particular.
+
+##### Example
+
+   <clever-paper-input label="FirstName" placeholder="First name" rule="{{rules.FirstName}}"
+                        value="{{data.FirstName}}">
+   </clever-paper-input>
+
+   <clever-paper-input label="LastName" placeholder="Last name" rule="{{rules.LastName}}"
+                        value="{{data.LastName}}">
+   </clever-paper-input>
+
+@element clever-paper-input
+@blurb Element providing solution to no problem in particular.
+@status alpha
+@homepage http://polymerlabs.github.io/clever-paper-input
+-->
+<polymer-element name="clever-paper-input"  extends="paper-input" attributes="rule">
+
+  <template>
+     <shadow></shadow>
+  </template>
+
+  <script>
+
+    Polymer({
+        /**
+         * The `dirty` attribute specifies that user interact with input.
+         *
+         * @attribute
+         * @type string
+         * @default false
+         */
+        dirty:false,
+
+        /**
+         * The `valueChanged` handler.
+         *
+         * @method valueChanged
+         */
+        valueChanged: function(oldVal, newVal, args) {
+            this.super();
+
+            if (this.rule === undefined) return;
+
+            this.rule.ValidateEx(newVal);
+            this.rule.ValidateAsyncEx(newVal);
+
+            this.updateCustomValidity();
+
+        },
+
+        /**
+         * The `ruleChanged` handler. Attach to ErrorsChanged event.
+         *
+         * @method ruleChanged
+         */
+        ruleChanged:function(oldVal, newVal, args){
+            this.rule.ErrorsChanged.add(this.updateCustomValidity.bind(this));
+        },
+
+        /**
+         * Override the 'updateValidity_' method from core input to take into account dirty attribute for invalid.
+         *
+         * @method updateValidity_
+         */
+        updateValidity_: function() {
+            if (this.$.input.willValidate) {
+                this.invalid = this.dirty && (this.rule.HasErrors || !this.$.input.validity.valid);
+            }
+        },
+        /**
+         * It sets dirty flag and error message.
+         *
+         * @method updateCustomValidity
+         */
+        updateCustomValidity: function () {
+            this.dirty = true;
+            this.setCustomValidity(this.rule.ErrorMessage);
+        }
+    });
+
+  </script>
+
+</polymer-element>

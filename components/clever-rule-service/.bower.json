@@ -26,16 +26,18 @@
     "underscore": "~1.7.0",
     "q": "1.0.1",
     "hashmap": "~1.1.0",
-    "moment": "~2.8.3"
+    "moment": "~2.8.3",
+    "core-ajax": "polymer/core-ajax#~0.4.2",
+    "clever-paper-input": "latest"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^0.7.3"
   },
-  "_release": "e45eb6b42e",
+  "_release": "786dc56ffd",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "e45eb6b42e5ebcd31290a3b3eff75825a2c693c3"
+    "commit": "786dc56ffd1c99bc169e3ca77b4b21920513f2f6"
   },
   "_source": "git://github.com/rsamec/clever-rule-service.git",
   "_target": "master",

@@ -1,0 +1,29 @@
+{
+  "name": "clever-paper-input",
+  "version": "1.0.1",
+  "authors": [
+    "Roman Samec <roman.samec2@gmail.com>"
+  ],
+  "description": "Paper input element with validation and dirty flag.",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "form",
+    "validation"
+  ],
+  "main": "clever-paper-input.html",
+  "license": "MIT",
+  "homepage": "https://github.com/rsamec/clever-paper-input/",
+  "ignore": [
+    "/.*",
+    "/tests/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^0.4.1",
+    "paper-input": "Polymer/paper-input#~0.4.2"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^0.7.3"
+  }
+}
