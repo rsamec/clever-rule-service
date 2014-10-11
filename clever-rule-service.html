@@ -22,12 +22,12 @@ Element providing solution to no problem in particular.
 
 ##### Example
 
-    <clever-rule-service></core-rule-service>
+     <clever-rule-service rules="{{rules}}" url="api/meta-rules.json"></clever-rule-service>
 
 @element seed-element
 @blurb Loads validation rule service for passed url.
 @status alpha
-@homepage http://polymerlabs.github.io/seed-element
+@homepage http://rsamec.github.io/clever-rule-service
 -->
 <polymer-element name="clever-rule-service" attributes="rules url rulesDefinitionFormat">
 
@@ -50,10 +50,18 @@ Element providing solution to no problem in particular.
 
         Polymer('clever-rule-service',{
             /**
+             * The `url' attribute specifies the URI with declarative rules definition.
+             *
+             * @property
+             * @type string
+             * @default 'url'
+             */
+            url:'',
+            /**
              * The `rulesDefinitionFormat` attribute specifies that format used for declarative rules definition.
              * Supported formats are JSONSchema, RulesMetaData - see more information at https://github.com/rsamec/business-rules-engine
              *
-             * @attribute
+             * @property
              * @type string
              * @default 'RulesMetaData'
              */
