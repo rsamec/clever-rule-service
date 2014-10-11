@@ -5,7 +5,7 @@ See the [component page](http://rsamec.github.io/clever-rule-service) for more i
 
 ## Getting Started
 
-I've put together a [guide to clever-rule-service](http://rsamec.github.io/clever-paper-input/components/clever-paper-input/demo.html) to help get you rolling.
+I've put together a [guide to clever-rule-service](http://rsamec.github.io/clever-rule-service/components/clever-rule-service/demo.html) to help get you rolling.
 
 ## Testing Your Element
 

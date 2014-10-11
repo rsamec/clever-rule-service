@@ -33,11 +33,11 @@
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^0.7.3"
   },
-  "_release": "786dc56ffd",
+  "_release": "995c87b8b1",
   "_resolution": {
     "type": "branch",
     "branch": "master",
-    "commit": "786dc56ffd1c99bc169e3ca77b4b21920513f2f6"
+    "commit": "995c87b8b1edafb3701a9b8645ff886c66c780b2"
   },
   "_source": "git://github.com/rsamec/clever-rule-service.git",
   "_target": "master",
