@@ -1,0 +1,48 @@
+{
+  "name": "business-rules-engine",
+  "main": "dist/module/Validation.js",
+  "homepage": "https://github.com/rsamec/business-rules-engine",
+  "authors": [
+    "rsamec <roman.samec2@gmail.com>"
+  ],
+  "description": "Business rules engine",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "validation",
+    "validators",
+    "business",
+    "rules"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "typings",
+    "src",
+    "docs",
+    "content",
+    "app.js",
+    "dist/commonjs"
+  ],
+  "dependencies": {
+    "underscore": "~1.6.0",
+    "q": "~2.0.0",
+    "observe-js": "^0.1.0"
+  },
+  "_release": "cc6f9d5468",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "cc6f9d54682a45fcc5c75b5602de58d6affe4489"
+  },
+  "_source": "git://github.com/rsamec/business-rules-engine.git",
+  "_target": "*",
+  "_originalSource": "business-rules-engine"
+}

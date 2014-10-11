@@ -1,0 +1,7 @@
+{
+  "name": "clever-rule-service#gh-pages",
+  "private": true,
+  "dependencies": {
+    "clever-rule-service": "rsamec/clever-rule-service#master"
+  }
+}

@@ -1,0 +1,53 @@
+<!--
+    @license
+    Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
+    This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+    The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+    The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+    Code distributed by Google as part of the polymer project is also
+    subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<!doctype html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <title>seed-element Demo</title>
+
+  <script src="../platform/platform.js"></script>
+  <link rel="import" href="../clever-rule-service/clever-rule-service.html">
+  <link rel="import" href="../clever-paper-input/clever-paper-input.html">
+
+</head>
+<body unresolved>
+
+  <p>An example of using <code>&lt;clever-rule-service></code>:</p>
+
+  <template id="demo-form" is="auto-binding">
+
+      <clever-rule-service rules="{{rules}}" url="api/meta-rules.json"></clever-rule-service>
+
+      <clever-paper-input label="FirstName" placeholder="First name" rule="{{rules.Children['Person'].Rules['FirstName']}}"
+                          value="{{data.Person.FirstName}}" layout vertical>
+      </clever-paper-input>
+
+      <clever-paper-input label="LastName" placeholder="Last name" rule="{{rules.Children['Person'].Rules['LastName']}}"
+                          value="{{data.Person.LastName}}" layout vertical>
+      </clever-paper-input>
+      <br/><br/><br/>
+
+      <b>FullName:</b>{{data.Person.FirstName | emptyFilter }} {{data.Person.LastName | emptyFilter }}
+  </template>
+  <script>
+      PolymerExpressions.prototype.emptyFilter = function (input,emptyVal) {
+          if (emptyVal === undefined) emptyVal = "";
+          return input!==undefined? input :emptyVal;
+      };
+
+      var t = document.querySelector('#demo-form');
+      t.addEventListener('template-bound', function () {
+          t.data = {Person:{}};
+      });
+  </script>
+
+      </body>
+</html>
