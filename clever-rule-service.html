@@ -80,7 +80,7 @@ Element providing solution to no problem in particular.
             rulesLoaded: function () {
                 var json = this.$.ajax.response;
                 if (this.rulesFormat === 'JSONSchema'){
-                    this.rules = new FormSchema.JSONSchemaRuleFactory(json).CreateRule("Main");
+                    this.rules = new FormSchema.JsonSchemaRuleFactory(json).CreateRule("Main");
                 } else {
                     this.rules = new FormSchema.JQueryValidationRuleFactory(json).CreateRule("Main");
                 }
